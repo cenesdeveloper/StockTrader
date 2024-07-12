@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Account Settings
+{% endblock %}
+
+{% block main %}
+
+  <!-- Tab content -->
+  <div class="container mb-5">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-2">Account Details</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#username" class="nav-link">Username</a></li>
+        <li class="nav-item"><a href="#password" class="nav-link">Password</a></li>
+        <li class="nav-item"><a href="#cash" class="nav-link">Cash</a></li>
+      </ul>
+    </header>
+  </div>
+
+  <form action="/account" method="post">
+    <div class="form-group" id="username">
+      <h5 class="text-start mb-4">Change Username</h5>
+      <p class="text-start">Username</p>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter new username" name="username">
+      <button type="submit" class="btn btn-primary mt-4" value="change-username">Change username</button>
+    </div>
+
+    <div class="form-group mt-5" id="password">
+      <h5 class="text-start mb-4">Change Password</h5>
+      <p class="text-start">Current Password</p>
+      <input type="password" class="form-control mb-4" id="exampleInputPassword1" placeholder="Enter current password" name="password">
+      <p class="text-start">New Password</p>
+      <input type="password" class="form-control mb-4" id="exampleInputPassword2" placeholder="Enter new password" name="new_password">
+      <p class="text-start">Confirm Password</p>
+      <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Confirm new password" name="confirmation">
+      <button type="submit" class="btn btn-primary mt-4" value="change-password" >Change Password</button>
+    </div>
+
+    <div class="form-group mt-5" id="cash">
+      <h5 class="text-start mb-4">Add money to account</h5>
+      <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter amount in dollars" name="amount">
+      <button type="submit" class="btn btn-primary mt-4" value="add-money">Add money</button>
+    </div>
+  </form>
+
+{% endblock %}
+
