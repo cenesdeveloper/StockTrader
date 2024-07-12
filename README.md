@@ -1,6 +1,6 @@
 # StockTrader
 
-StockSim is an online stock trading simulation platform where users can practice buying and selling stocks using virtual money. This application provides a realistic trading experience with real-time stock data.
+StocTrader is an online stock trading simulation platform where users can practice buying and selling stocks using virtual money. This application provides a realistic trading experience with real-time stock data.
 
 ## Features
 
