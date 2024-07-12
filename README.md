@@ -7,6 +7,9 @@ StockSim is an online stock trading simulation platform where users can practice
 - **User Registration and Authentication**: Users can create accounts and log in securely.
 - **Real-time Stock Quotes**: Fetches current stock prices using the Yahoo Finance API.
 - **Buying and Selling Stocks**: Users can simulate stock transactions with virtual money.
+- 
+<img width="1094" alt="image" src="https://github.com/user-attachments/assets/eacf0b93-cde1-4b8e-b9f5-cf449a201ad6">
+
 - **Portfolio Management**: Displays user portfolios with current stock values and total worth.
 - **Transaction History**: Logs all buy and sell transactions for user review.
 - **Account Management**: Allows users to change passwords and usernames.
