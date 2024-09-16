@@ -5,7 +5,7 @@ import pytz
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import apology, login_required, lookup, usd, check_password_strength, execute_query
+from helpers import apology, login_required, lookup, usd, execute_query
 
 
 # Configure application
@@ -38,9 +38,7 @@ def account():
             rows = execute_query(
                 "SELECT * FROM users WHERE id = ?", session["user_id"],
             )
-            valid, message = check_password_strength(new_password)
-            if not valid:
-                return apology(message)
+        
             if not check_password_hash(rows[0]["hash"], request.form.get("password")):
                 return apology("Wrong password")
 
@@ -84,6 +82,8 @@ def index():
 
     for transaction in transactions:
         quote = lookup(transaction["symbol"])
+        if not quote:
+            return apology(f"Invalid symbol {transaction['symbol']}")
         transaction["price"] = quote["price"]
         transaction["total"] = transaction["price"] * transaction["shares"]
         total += transaction["total"]
@@ -211,16 +211,13 @@ def register():
 
             confirmation = request.form.get("confirmation")
 
-            valid, message = check_password_strength(password)
-            
-            if not valid:
-                return apology(message)
             if len(password) == 0:
                 return apology("You must provide password")
             if len(confirmation) == 0:
                 return apology("You must provide confirmation")
             if password != confirmation:
                 return apology("The password and confirmation does not match")
+            
             execute_query("INSERT INTO users (username, hash) VALUES (?, ?)", (username, generate_password_hash(password)))
             flash('Registered Succesfully!')
             return redirect("/")
@@ -256,7 +253,7 @@ def sell():
         date = datetime.datetime.now(pytz.timezone("US/Eastern"))
         execute_query("UPDATE users SET cash = ? WHERE id = ?", (cash, session["user_id"]))
         execute_query("INSERT INTO transactions (user_id, symbol, shares, price, date) VALUES (?, ?, ?, ?, ?)", (session["user_id"], symbol, -int(share), price, date))
-        flash(f"Sold {shares} share(s) of {symbol} for {usd(shares * price)}")
+        flash(f"Sold {share} share(s) of {symbol} for {usd(shares * price)}")
         return redirect("/")
     else:
         return render_template("sell.html", symbols=symbols)
